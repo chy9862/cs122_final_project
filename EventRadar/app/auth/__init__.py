@@ -1,7 +1,9 @@
 from flask import Blueprint, render_template
+from app.models.models import db # check this later if it is an issue, nmight need to rename mdels.py to __init__.py
+from flask_login import login_user, login_required, logout_user, current_user
+from werkzeug.security import generate_password_hash, check_password_hash
 
 routes = Blueprint('routes', __name__)
-
 
 @routes.route('/logout')
 def logout():
@@ -9,9 +11,9 @@ def logout():
 
 @routes.route('/')
 def login():
-    # return '<h1>LoggedIn</h1>'
-    return render_template('home.html')
+    return '<h1>LoggedIn</h1>'
     
 @routes.route('/sign-up')
 def signUp():
-    return '<h1>SignUp</h1>'
+    
+    return render_template('SignUpPage.html')
