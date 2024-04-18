@@ -43,10 +43,6 @@ def create_app(config_class=Config):
     @app.route('/')
     def home():
         return render_template('index.html')
-
-    @app.route('/unauthorized/sign-up')
-    def signUp():
-        return '<h1>Unauthorized Sign Up</h1>'
     
     
     return app
