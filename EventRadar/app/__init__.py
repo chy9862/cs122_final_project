@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager
 # from flask_migrate import Migrate
@@ -20,17 +20,18 @@ def create_app(config_class=Config):
     # Initialize the app with the config from the config.py
     app = Flask(__name__)
     app.config.from_object(config_class)
+    # secret key for cookies that will be generated in eventRadar
     app.config['SECRET_KEY']
 
     # Initialize extensions with the application
-    db.init_app(app)
-    login_manager.init_app(app)
-    oauth.init_app(app)  # Initialize OAuth with the app
+    # db.init_app(app)
+    # login_manager.init_app(app)
+    # oauth.init_app(app)  # Initialize OAuth with the app
     # migrate.init_app(app, db)  # Initialize migrate with the app and db
 
     # Register Blueprints
-    # from app.auth import auth as auth_blueprint
-    # app.register_blueprint(auth_blueprint, url_prefix='/auth')
+    from app.auth import routes as routes_bp
+    app.register_blueprint(routes_bp, url_prefix='/auth')
 
     # from app.events import events as events_blueprint
     # app.register_blueprint(events_blueprint, url_prefix='/events')
@@ -41,6 +42,11 @@ def create_app(config_class=Config):
     # A simple homepage route, can be expanded or replaced as needed
     @app.route('/')
     def home():
-        return "Welcome to EventRadar!"
+        return render_template('index.html')
 
+    @app.route('/unauthorized/sign-up')
+    def signUp():
+        return '<h1>Unauthorized Sign Up</h1>'
+    
+    
     return app
