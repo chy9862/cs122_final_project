@@ -41,7 +41,6 @@
           data-bs-target="#navcol-1"
         ></button>
         <div class="collapse navbar-collapse" id="navcol-1">
-          <a href="/about">Home</a>
           <p
             class="text-white d-xxl-flex ms-auto navbar-text"
             style="font-size: 16px; margin-bottom: 0px"
@@ -58,6 +57,25 @@
         </div>
       </div>
     </nav>
+    <!-- {% with messages = get_flashed_messages(with_categories = true) %}
+    {%if messages%}
+      {% for category, message in messages %}
+      {% if category == 'error' %}
+      <div class="alert alert-danger alter-dismissable fade show" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert"></button>
+        <span aria-hidden="true">&times;</span>
+      </div>
+      {% else %}
+      <div class="alert alert-success alter-dismissable fade show" role="alert">
+        {{message}}
+        <button type="button" class="close" data-dismiss="alert"></button>
+        <span aria-hidden="true">&times;</span>
+      </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %} -->
     <div class="container col-xl-10 col-xxl-8 px-4 py-5">
       <div class="row align-items-center g-lg-5 py-5">
         <div class="col col-lg-7 text-center text-lg-start">
