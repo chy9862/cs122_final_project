@@ -57,25 +57,27 @@
         </div>
       </div>
     </nav>
-    <!-- {% with messages = get_flashed_messages(with_categories = true) %}
-    {%if messages%}
-      {% for category, message in messages %}
-      {% if category == 'error' %}
-      <div class="alert alert-danger alter-dismissable fade show" role="alert">
-        {{message}}
-        <button type="button" class="close" data-dismiss="alert"></button>
+
+    <!-- 4/18/24 @ 1:14pm for some reason, i cant have the close button actually close the message dialogue -->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %} {% for category, message in messages %} {% if category ==
+    'error' %}
+    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
-      </div>
-      {% else %}
-      <div class="alert alert-success alter-dismissable fade show" role="alert">
-        {{message}}
-        <button type="button" class="close" data-dismiss="alert"></button>
+      </button>
+    </div>
+    {% else %}
+    <div class="alert alert-success alter-dismissable fade show" role="alert">
+      {{ message }}
+      <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
-      </div>
-    {% endif %}
-    {% endfor %}
-    {% endif %}
-    {% endwith %} -->
+      </button>
+    </div>
+    {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+    
     <div class="container col-xl-10 col-xxl-8 px-4 py-5">
       <div class="row align-items-center g-lg-5 py-5">
         <div class="col col-lg-7 text-center text-lg-start">
@@ -104,8 +106,8 @@
               <input
                 class="form-control"
                 type="text"
-                id="firstName"
-                name="firstName"
+                id="first_name"
+                name="first_name"
                 placeholder="First Name"
               /><label class="form-label" for="firstNameInput"
                 >First Name</label
