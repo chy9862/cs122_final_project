@@ -24,6 +24,8 @@ def create_app(config_class=Config):
     app.config['SQLALCHEMY_DATABASE_URI'] = Config.SQLALCHEMY_DATABASE_URI
     db.init_app(app)
     
+    # login_manager = LoginManager()
+    # login_manager.login_view = 'auth.login'
     # login_manager.init_app(app)
     # migrate.init_app(app, db)  # Initialize migrate with the app and db
 

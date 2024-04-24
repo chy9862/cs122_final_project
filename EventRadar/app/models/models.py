@@ -13,11 +13,10 @@ from app import db
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    # username = db.Column(db.String(64), index=True, unique=True)
     first_name = db.Column(db.String(20), index=True, nullable=False)
     password = db.Column(db.String(100), index=True, nullable=False)
     #relationship between user and event to store all events users sign up for. 
-    # event = db.relationship('Event')
+    event = db.relationship('Event')
 
 class Event(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -28,4 +27,4 @@ class Event(db.Model):
     start_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     end_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     created_at = db.Column(db.DateTime(timezone=True), index=True, default=datetime.utcnow)
-    # user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
