@@ -40,12 +40,5 @@ def create_app(config_class=Config):
     
     with app.app_context():
         db.create_all()
-
-    # @app.route('/')
-    # def home():
-    #     return render_template('index.html')
-    
-    
-    # create_app(app)
     
     return app

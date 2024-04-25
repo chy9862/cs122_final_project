@@ -18,25 +18,38 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         
-        #check if user used the field prompts properly -- cannot be empty.
-        if len(email) < 1:
-            flash('Email cannot be empty, please try again', category='error')
-        if len(password) < 1:
-            flash('Password cannot be empty, try again.', category='error')
-        else:
+        
+        # #check if user used the field prompts properly -- cannot be empty.
+        # if len(email) < 1:
+        #     flash('Email cannot be empty, please try again', category='error')
+        # if len(password) < 1:
+        #     flash('Password cannot be empty, try again.', category='error')
             #checks if user exist through email. Then use check_password_hash() to check if password matches with password from request
-            user = User.query.filter_by(email=email).first()
-            if user:
-                if check_password_hash(user.password, password):
-                    flash('Loggin in successfully.', category='success')
-                    # login_user(user, remember=True)
-                    return redirect('views.authorizedHome') # change this later
-                else:
-                    flash('Password does not match. Try Again.', category='error')
+        user = User.query.filter_by(email=email).first()
+        if user:
+            if check_password_hash(user.password, password):
+                flash('Loggin in successfully.', category='success')
+                # login_user(user, remember=True)
+                return redirect(url_for('views.home'))
             else:
-                flash('Email does not exist.', category='error')
+                flash('Password does not match. Try Again.', category='error')
+        else:
+            flash('Email does not exist.', category='error')
                 
     return render_template('LoginPage.html')
+
+
+@routes.route('/testing')
+def test():
+    userEmail = 'roberts@yahoo.com'
+    userPassword = 'Password123'
+    user = User.query.filter_by(email=userEmail).first()
+    if user:
+        if check_password_hash(user.password, userPassword):
+            return '<p> User is Authenticated! </p>'
+        else:
+            return '<p> User NOT authenticated </p>'
+    return '<p> Did not reach if block </p>'
     
 @routes.route('/sign-up', methods = ['GET', 'POST'])
 def signUp():
