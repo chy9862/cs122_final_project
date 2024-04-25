@@ -18,19 +18,25 @@ def login():
         email = request.form.get('email')
         password = request.form.get('password')
         
-        #checks if user exist through email. Then use check_password_hash() to check if password matches with password from request
-        user = User.query.filter_by(email=email).first()
-        if user:
-            if check_password_hash(user.password, password):
-                flash('Loggin in successfully.', category='success')
-                login_user(user, remember=True)
-                return redirect('views.home') # change this later
-            else:
-                flash('Password does not match. Try Again.', category='error')
+        #check if user used the field prompts properly -- cannot be empty.
+        if len(email) < 1:
+            flash('Email cannot be empty, please try again', category='error')
+        if len(password) < 1:
+            flash('Password cannot be empty, try again.', category='error')
         else:
-            flash('Email does not exist.', category='error')
-            
-    return render_template('LoginPage.html', user = current_user)
+            #checks if user exist through email. Then use check_password_hash() to check if password matches with password from request
+            user = User.query.filter_by(email=email).first()
+            if user:
+                if check_password_hash(user.password, password):
+                    flash('Loggin in successfully.', category='success')
+                    # login_user(user, remember=True)
+                    return redirect('views.authorizedHome') # change this later
+                else:
+                    flash('Password does not match. Try Again.', category='error')
+            else:
+                flash('Email does not exist.', category='error')
+                
+    return render_template('LoginPage.html')
     
 @routes.route('/sign-up', methods = ['GET', 'POST'])
 def signUp():
@@ -53,8 +59,8 @@ def signUp():
             new_user = User(email = email, first_name = first_name, password = generate_password_hash(password1, method='pbkdf2:sha256'))
             db.session.add(new_user)
             db.session.commit()
-            login_user(new_user, remember=True)
+            # login_user(new_user, remember=True)
             flash('Account created successfully!', category='success')
             # return redirect(url_for('views.authorizedHome'))
         
-    return render_template('SignUpPage.html', user = current_user)
+    return render_template('SignUpPage.html')
