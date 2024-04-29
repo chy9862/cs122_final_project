@@ -8,12 +8,6 @@ from os import path
 # Create the database instance globally
 db = SQLAlchemy()
 DB_NAME = 'eventradar.db'
-# Initialize login manager
-login_manager = LoginManager()
-# Login manager needs a view to redirect to when a login is required.
-login_manager.login_view = 'auth.login'
-# Initialize database migration tool
-# migrate = Migrate()
 
 def create_app(config_class=Config):
     # Initialize the app with the config from the config.py
@@ -24,9 +18,18 @@ def create_app(config_class=Config):
     app.config['SQLALCHEMY_DATABASE_URI'] = Config.SQLALCHEMY_DATABASE_URI
     db.init_app(app)
     
-    # login_manager = LoginManager()
-    # login_manager.login_view = 'auth.login'
-    # login_manager.init_app(app)
+    
+    # Initialize login manager
+    login_manager = LoginManager()
+    # Login manager needs a view to redirect to when a login is required.
+    login_manager.login_view = 'views.home'
+    login_manager.init_app(app)
+    
+    #how a user is loaded. looks for the primary key of the user
+    @login_manager.user_loader
+    def load_user(id):
+        return User.query.get(int(id))
+    
     # migrate.init_app(app, db)  # Initialize migrate with the app and db
 
     # Register Blueprints
