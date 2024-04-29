@@ -6,3 +6,7 @@
 /EventRadar/app/__pycache__
 /EventRadar/app/auth/__pycache__
 /EventRadar/app/auth/__pycache__
+EventRadar/app/models/__pycache__/models.cpython-310.pyc
+EventRadar/app/auth/__pycache__/__init__.cpython-310.pyc
+EventRadar/app/__pycache__/config.cpython-310.pyc
+EventRadar/app/__pycache__/__init__.cpython-310.pyc
