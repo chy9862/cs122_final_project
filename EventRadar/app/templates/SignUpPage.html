@@ -50,7 +50,7 @@
           <a
             class="btn btn-primary align-self-end"
             role="button"
-            href="/auth/login"
+            href="{{url_for('routes.login')}}"
             style="margin-right: 15px; margin-left: 15px; padding-left: 12px"
             >Log-In</a
           >
@@ -62,14 +62,14 @@
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %} {% if category ==
     'error' %}
-    <div class="alert alert-danger alter-dismissable fade show" role="alert">
+    <div class="alert alert-danger alter-dismissible fade show" role="alert">
       {{ message }}
       <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
     {% else %}
-    <div class="alert alert-success alter-dismissable fade show" role="alert">
+    <div class="alert alert-success alter-dismissible fade show" role="alert">
       {{ message }}
       <button type="button" class="close" data-dismiss="alert">
         <span aria-hidden="true">&times;</span>
