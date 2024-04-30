@@ -30,11 +30,12 @@ def create_app(config_class=Config):
     def load_user(id):
         return User.query.get(int(id))
     
-    # migrate.init_app(app, db)  # Initialize migrate with the app and db
-
     # Register Blueprints
-    from app.auth import routes as routes_bp
+    from app.auth.views import routes as routes_bp
     app.register_blueprint(routes_bp, url_prefix='/auth')
+    
+    # from app.auth import routes as routes_bp
+    # app.register_blueprint(routes_bp, url_prefix='/auth')
     
     from app.views import views as views_bp
     app.register_blueprint(views_bp, url_prefix='/')
