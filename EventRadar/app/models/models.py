@@ -23,8 +23,9 @@ class Event(db.Model):
     title = db.Column(db.String(128), nullable=False)
     description = db.Column(db.Text, nullable=True)
     location = db.Column(db.String(128), nullable=False)
+    city = db.Column(db.String(128), nullable=False)
     # 4/18/2024 @ 1:37 pm check if utcnow is causing any issues 
     start_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     end_time = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    created_at = db.Column(db.DateTime(timezone=True), index=True, default=datetime.utcnow)
+    url = db.Column(db.String(128), nullable=False, default='/')
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))

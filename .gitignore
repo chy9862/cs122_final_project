@@ -10,3 +10,12 @@ EventRadar/app/models/__pycache__/models.cpython-310.pyc
 EventRadar/app/auth/__pycache__/__init__.cpython-310.pyc
 EventRadar/app/__pycache__/config.cpython-310.pyc
 EventRadar/app/__pycache__/__init__.cpython-310.pyc
+/EventRadar/app/models/__pycache__
+EventRadar/app/__pycache__/__init__.cpython-312.pyc
+EventRadar/app/auth/__pycache__/__init__.cpython-312.pyc
+EventRadar/app/events/__pycache__/__init__.cpython-312.pyc
+EventRadar/app/events/__pycache__/routes.cpython-312.pyc
+EventRadar/app/models/__pycache__/models.cpython-312.pyc
+EventRadar/app/__pycache__/__init__.cpython-312.pyc
+EventRadar/app/auth/__pycache__/__init__.cpython-312.pyc
+EventRadar/app/models/__pycache__/models.cpython-312.pyc
