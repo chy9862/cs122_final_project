@@ -1,83 +1,5 @@
-<!DOCTYPE html>
-<html data-bs-theme="light" lang="en" style="color: var(--bs-primary)">
-  <head>
-    <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-    />
-    <title>EventRadar</title>
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="/static/css/Lato.css" />
-    <link rel="stylesheet" href="/static/css/bs-theme-overrides.css" />
-    <link rel="stylesheet" href="/static/css/Signup-page-with-overlay.css" />
-    <link rel="stylesheet" href="/static/css/untitled.css" />
-  </head>
-
-  <body>
-    <nav class="navbar navbar-expand bg-primary navigation-clean navbar-light">
-      <div class="container">
-        <a class="navbar-brand link-light" href="/"
-          ><svg
-            xmlns="http://www.w3.org/2000/svg"
-            width="1em"
-            height="1em"
-            viewBox="0 0 24 24"
-            stroke-width="2"
-            stroke="currentColor"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="icon icon-tabler icon-tabler-radar"
-          >
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M21 12h-8a1 1 0 1 0 -1 1v8a9 9 0 0 0 9 -9"></path>
-            <path d="M16 9a5 5 0 1 0 -7 7"></path>
-            <path d="M20.486 9a9 9 0 1 0 -11.482 11.495"></path></svg
-          >EventRadar</a
-        ><button
-          data-bs-toggle="collapse"
-          class="navbar-toggler"
-          data-bs-target="#navcol-1"
-        ></button>
-        <div class="collapse navbar-collapse" id="navcol-1">
-          <p
-            class="text-white d-xxl-flex ms-auto navbar-text"
-            style="font-size: 16px; margin-bottom: 0px"
-          >
-            Already Have An Account?
-          </p>
-          <a
-            class="btn btn-primary align-self-end"
-            role="button"
-            href="{{url_for('routes.login')}}"
-            style="margin-right: 15px; margin-left: 15px; padding-left: 12px"
-            >Log-In</a
-          >
-        </div>
-      </div>
-    </nav>
-
-    <!-- 4/18/24 @ 1:14pm for some reason, i cant have the close button actually close the message dialogue -->
-    {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %} {% if category ==
-    'error' %}
-    <div class="alert alert-danger alter-dismissible fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% else %}
-    <div class="alert alert-success alter-dismissible fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% endif %} {% endfor %} {% endif %} {% endwith %}
-
-    
+{%extends 'base.html'%} {%block title%}Sign-Up{%endblock%}
+{%block content%}    
     <div class="container col-xl-10 col-xxl-8 px-4 py-5">
       <div class="row align-items-center g-lg-5 py-5">
         <div class="col col-lg-7 text-center text-lg-start">
@@ -138,8 +60,4 @@
         </div>
       </div>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/static/js/bs-init.js"></script>
-    <script src="/static/js/Simple-Typing-Carousel-text-typing.js"></script>
-  </body>
-</html>
+{%endblock%}
