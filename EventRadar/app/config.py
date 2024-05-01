@@ -20,9 +20,4 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Eventbrite API key
-    EVENTBRITE_API_KEY = 'OD7MC3WOBIMIBOMYDQ'
-
-    # Google OAuth Configurations (to be filled with your credentials)
-    GOOGLE_CLIENT_ID = '410154457877-8lhj4gj2hivt4f6olrl54dkhsm0u53sf.apps.googleusercontent.com'
-    GOOGLE_CLIENT_SECRET =  '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'
-    GOOGLE_DISCOVERY_URL = ('https://accounts.google.com/.well-known/openid-configuration')
+    api_key = "Zno3Ua2Uc6W4Am1IgDrW9osB2H6dnZct"

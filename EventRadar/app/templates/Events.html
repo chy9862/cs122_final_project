@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events for {{ keyword }}</title>
+</head>
+<body>
+    <h1>Events for {{ keyword }}</h1>
+    <ul>
+        {% for event in events %}
+        <li>{{ event }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
