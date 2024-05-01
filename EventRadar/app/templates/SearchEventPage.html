@@ -14,12 +14,15 @@
     <div class="col" style="height: 600px;overflow: hidden;">
         <div class="row" style="overflow: scroll;height: inherit;">
             <div class="col-4 py-3 mx-auto col-xl-4 col-lg-6 col-md-6 col-sm-12" style="min-width:300px;min-height:300px;">
-                <div class="card" style="width:100%;height:100%;"><a href="#"><img class="img-fluid card-img-top" style="height:200px;" src="/static/img/bourdelle.jpg"></a>
+                <!-- make sure to change src for image tag in line 18  && also change the a tag to reproduce line 18 for every event. -->
+                <div class="card" style="width:100%;height:100%;"><img class="img-fluid card-img-top" style="height:200px;" src="/static/img/bourdelle.jpg">
                     <div class="card-body">
+                        <!-- change this stuff with jinja magic  -->
                         <h5>Event Name</h5>
                         <p>Event Location &amp; City</p>
                         <p>Event Date and Time</p>
                     </div>
+                    <!-- make sure to change a tag href in line 26 to the ticketmaster link under the events page -->
                     <div class="card-footer text-center"><small><a href="#" style="color: var(--bs-primary);"><i class="fa fa-eye pe-1"></i>View Event</a></small></div>
                 </div>
             </div>

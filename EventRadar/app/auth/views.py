@@ -15,6 +15,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from app.models.models import User
 import requests
+from app.config import Config
 
 routes = Blueprint("routes", __name__)
 
@@ -92,69 +93,51 @@ def signUp():
     return render_template("SignUpPage.html", user=current_user)
 
 
-@routes.route("/authorizedHomepage")
+@routes.route("/authorizedHomepage", methods=['POST', 'GET'])
 @login_required
 def authorizedHomepage():
-    return render_template("AuthorizedHomepage.html", user=current_user)
+    if request.method == 'POST':
+        keyword = request.form.get('search')
+        if not keyword:
+            return flash("keyword cannot be empty.", category='error')
+        # redirect(url_for('routes.get_event', keyword = keyword))
+        event_list = []
 
+        for i in range(2):  # you can change the number in range(num) for how many pages you want
 
-@routes.route("/results", methods=["POST"])
-@login_required
-def search_events():
-    keyword = request.form["search"]
-    if not keyword:
-        return jsonify({"error": "Keyword parameter is missing."}), 400
+            # get the json data
+            event_data = fetch_event_details(Config.api_key, i, keyword)
 
-    return redirect(url_for("get_event", keyword=keyword))
+            # Check if the response is an error message
+            if isinstance(event_data, str):
+                return make_response(jsonify({"error": event_data}), 403)
 
+            # get the events list in json file
+            events = event_data.get("_embedded", {}).get("events", [])
 
-@routes.route("/results/<keyword>")
-@login_required
-def get_event(keyword):
-    # get the api key from ticketmaster developer website
-    api_key = "Zno3Ua2Uc6W4Am1IgDrW9osB2H6dnZct"
+            # create the dictionary for each event by traversing all the events
+            for event in events:
 
-    # create the list for containing events dictionaries.
-    event_list = []
+                # create the new dictionary
+                event_info = {}
 
-    for i in range(
-        2
-    ):  # you can change the number in range(num) for how many pages you want
+                # get the event name, data, url
+                event_info["event_name"] = event.get("name")
+                event_info["event_date"] = (
+                    event.get("dates", {})
+                    .get("start", {})
+                    .get("localDate", "Date not available")
+                )
+                event_info["event_url"] = event.get("url", "URL not available")
 
-        # get the json data
-        event_data = fetch_event_details(api_key, i, keyword)
+                # get the "venues" list for event
+                venues = event.get("_embedded", {}).get("venues", [])
 
-        # Check if the response is an error message
-        if isinstance(event_data, str):
-            return make_response(jsonify({"error": event_data}), 403)
+                # get the "city" information in the list
+                for venue in venues:
 
-        # get the events list in json file
-        events = event_data.get("_embedded", {}).get("events", [])
-
-        # create the dictionary for each event by traversing all the events
-        for event in events:
-
-            # create the new dictionary
-            event_info = {}
-
-            # get the event name, data, url
-            event_info["event_name"] = event.get("name")
-            event_info["event_date"] = (
-                event.get("dates", {})
-                .get("start", {})
-                .get("localDate", "Date not available")
-            )
-            event_info["event_url"] = event.get("url", "URL not available")
-
-            # get the "venues" list for event
-            venues = event.get("_embedded", {}).get("venues", [])
-
-            # get the "city" information in the list
-            for venue in venues:
-
-                # get the city name for the event and check the city is matched
-                city = venue.get("city", {}).get("name", "")
-                if city == "Minneapolis":
+                    # get the city name for the event and check the city is matched
+                    city = venue.get("city", {}).get("name", "")
                     event_info["venue"] = venue.get("name", "Venue not available")
                     event_info["city"] = city
 
@@ -168,10 +151,11 @@ def get_event(keyword):
                     # if the city is mateched, the dictionary is added to the list 'event_list'
                     if event_info.get("event_name") and event_info.get("venue"):
                         event_list.append(event_info)
-
-    return render_template(
-        "Events.html", keyword=keyword, events=event_list, user=current_user
-    )
+        if len(event_list) == 0:
+            flash("There are no events happening in that area. Try again", category='error')
+        else:
+            return render_template('Events.html', events = event_list, user = current_user)
+    return render_template("AuthorizedHomepage.html", user=current_user)
 
 
 # get the api key and page number
@@ -188,7 +172,3 @@ def fetch_event_details(api_key, page, keyword):
         return response.json()
     else:
         return "Failed to retrieve events."
-
-
-if __name__ == "__main__":
-    app.run(debug=True)
