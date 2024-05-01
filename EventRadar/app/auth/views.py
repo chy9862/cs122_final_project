@@ -93,17 +93,19 @@ def signUp():
     return render_template("SignUpPage.html", user=current_user)
 
 
-@routes.route("/authorizedHomepage", methods=['POST', 'GET'])
+@routes.route("/authorizedHomepage", methods=["POST", "GET"])
 @login_required
 def authorizedHomepage():
-    if request.method == 'POST':
-        keyword = request.form.get('search')
+    if request.method == "POST":
+        keyword = request.form.get("search")
         if not keyword:
-            return flash("keyword cannot be empty.", category='error')
+            return flash("keyword cannot be empty.", category="error")
         # redirect(url_for('routes.get_event', keyword = keyword))
         event_list = []
 
-        for i in range(2):  # you can change the number in range(num) for how many pages you want
+        for i in range(
+            2
+        ):  # you can change the number in range(num) for how many pages you want
 
             # get the json data
             event_data = fetch_event_details(Config.api_key, i, keyword)
@@ -152,9 +154,14 @@ def authorizedHomepage():
                     if event_info.get("event_name") and event_info.get("venue"):
                         event_list.append(event_info)
         if len(event_list) == 0:
-            flash("There are no events happening in that area. Try again", category='error')
+            flash(
+                "There are no events happening in that area. Try again",
+                category="error",
+            )
         else:
-            return render_template('Events.html', events = event_list, user = current_user)
+            return render_template(
+                "SearchEventPage.html", events=event_list, user=current_user
+            )
     return render_template("AuthorizedHomepage.html", user=current_user)
 
 
