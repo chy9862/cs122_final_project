@@ -47,3 +47,9 @@ Finally, run the server with the command:
 ```bash
   python3 run.py
 ```
+
+## Flowchart
+This flowchart outlines the user journey within EventRadar, starting from user authentication through registration and login processes. After logging in, users land on the homepage where they can access a the search function where they can look for events near their area or a specific function. User actions such as event searches and viewing search results are depicted, as well as account creation and user login. 
+
+![User Flowchart](./images/flowchart_122.png)
+
