@@ -1,7 +1,7 @@
 # Welcome To EventRadar
 
 ## About EventRadar
-EventRadar is a Flask-based web application designed to simplify the process of discovering local and virtual events. By integrating with the Ticketmaster API, EventRadar provides users with access to a comprehensive list of events, ranging from concerts to professional seminars. The platform features secure user authentication, personalized event recommendations, and an intuitive interface that ensures a seamless user experience.
+EventRadar is a Flask-based web application designed to simplify the process of discovering local and virtual events. By integrating with the Ticketmaster API, EventRadar provides users with access to a comprehensive list of events, ranging from concerts to professional seminars. The platform features secure user authentication and an intuitive interface that ensures a seamless user experience.
 
 ## Tech Stack
 EventRadar leverages a robust and versatile set of technologies, ensuring a scalable, secure, and user-friendly platform. Below is a breakdown of the main technologies and tools used:
