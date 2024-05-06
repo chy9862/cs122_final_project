@@ -19,3 +19,31 @@ EventRadar leverages a robust and versatile set of technologies, ensuring a scal
 - **Ticketmaster API**: Integrates with EventRadar to fetch a broad spectrum of event data, allowing users to explore a variety of local events based on their interests.
 
 - **Bootstrap**: For front-end development, Bootstrap is employed to design responsive and mobile-first pages that enhance user experience and interface design.
+
+## How to Run:
+To get EventRadar up and running on your local machine for development and testing purposes, follow these detailed steps:
+- **Create a Virtual Environment**
+  Creating a virtual environment is essential to isolate your package dependencies locally:
+  - ** For Windows:
+  ```bash
+    python -m venv venv
+    venv\Scripts\activate
+  ```
+  - **For macOS and Linux**:
+  ```bash
+    python3 -m venv venv
+    source venv/bin/activatex
+  ```
+- **Install requirements**:
+  After running your virtual environment, make sure to install all the requirements using the command:
+  ```bash
+    pip install -r requirements.txt
+  ```
+  Make sure that you are in the EventRadar directory that has the `requirements.txt` file 
+
+
+- **Run Server**
+Finally, run the server with the command:
+```bash
+  python3 run.py
+```
