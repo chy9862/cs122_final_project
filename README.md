@@ -65,6 +65,7 @@ This flowchart outlines the user journey within EventRadar, starting from user a
 - **Description:** On this page, new users can sign up for an account to access exclusive features. The page includes fields for entering personal information and creating a new user profile.
 ![Signup_page](./images/signup.png)
 
+
 **Authorized Page**
 
 - **Description:** After account creation or logging in, users are directed to this page where they can start interacting with the application. It features a search bar to search for events using keywords.
