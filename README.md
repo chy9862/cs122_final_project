@@ -55,19 +55,19 @@ This flowchart outlines the user journey within EventRadar, starting from user a
 
 ## Snapshot of the running program 
 
-Homepage 
+**Homepage**
 
 ![hompage](./images/homepage.png)
 
-Sign-Up Page
+**Sign-Up Page**
 
 ![Signup_page](./images/signup.png)
 
-Authorized Page
+**Authorized Page**
 
 ![Authorized_page](./images/search_event.png)
 
-Lists of Event Page
+**Lists of Event Page**
 
 ![list_event_page](./images/event_page.png)
 
