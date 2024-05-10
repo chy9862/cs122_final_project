@@ -58,26 +58,26 @@ This flowchart outlines the user journey within EventRadar, starting from user a
 **Homepage**
 
 - **Description:** This is the first view users encounter when they run the application. It provides a welcoming interface and basic navigation options.
-- 
+  
 ![hompage](./images/homepage.png)
 
 **Sign-Up Page**
 
 - **Description:** On this page, new users can sign up for an account to access exclusive features. The page includes fields for entering personal information and creating a new user profile.
-- 
+  
 ![Signup_page](./images/signup.png)
 
 
 **Authorized Page**
 
 - **Description:** After account creation or logging in, users are directed to this page where they can start interacting with the application. It features a search bar to search for events using keywords.
-- 
+  
 ![Authorized_page](./images/search_event.png)
 
 **Lists of Event Page**
 
 - **Description:** This page displays a list of events matching the search criteria entered in the search bar. Users can browse various events and click the URL to purchase tickets for the events.
-- 
+  
 ![list_event_page](./images/event_page.png)
 
 
