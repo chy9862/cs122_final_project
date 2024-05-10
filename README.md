@@ -53,10 +53,12 @@ This flowchart outlines the user journey within EventRadar, starting from user a
 
 ![User Flowchart](./images/flowchart_122.png)
 
-## Snapshot of the running program
+## Snapshot of the running program 
 
+Homepage 
 ![hompage](./images/homepage.png)
 
-
+Sign-Up Page
+![Signup_page](./images/signup.png)
 
 
