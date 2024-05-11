@@ -34,16 +34,10 @@ def create_app(config_class=Config):
     from app.auth.views import routes as routes_bp
     app.register_blueprint(routes_bp, url_prefix='/auth')
     
-    # from app.auth import routes as routes_bp
-    # app.register_blueprint(routes_bp, url_prefix='/auth')
-    
     from app.views import views as views_bp
     app.register_blueprint(views_bp, url_prefix='/')
-    
-    from app.events.routes import events as events_bp
-    app.register_blueprint(events_bp, url_prefix='/events')
 
-    from app.models.models import User, Event
+    from app.models.models import User
     
     with app.app_context():
         db.create_all()
