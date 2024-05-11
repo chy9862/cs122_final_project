@@ -13,21 +13,21 @@ from app import (
 )  # check this later if it is an issue, nmight need to rename mdels.py to __init__.py
 from flask_login import login_user, login_required, logout_user, current_user
 from werkzeug.security import generate_password_hash, check_password_hash
-from app.models.models import User
+from app.models import User
 import requests
 from app.config import Config
 
-routes = Blueprint("routes", __name__)
+auth = Blueprint("auth", __name__)
 
 
-@routes.route("/logout")
+@auth.route("/logout")
 @login_required
 def logout():
     logout_user()
     return redirect(url_for("views.home"))
 
 
-@routes.route("/login", methods=["GET", "POST"])
+@auth.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
         email = request.form.get("email")
@@ -39,7 +39,10 @@ def login():
         if len(password) < 1:
             flash("Password cannot be empty, try again.", category="error")
         else:
-            # checks if user exist through email. Then use check_password_hash() to check if password matches with password from request
+            """
+            checks if user exist through email. Then use check_password_hash()
+            to check if password matches with password from request
+            """
             user = User.query.filter_by(email=email).first()
             if user:
                 if check_password_hash(user.password, password):
@@ -51,10 +54,10 @@ def login():
             else:
                 flash("Email does not exist.", category="error")
 
-    return render_template("LoginPage.html", user=current_user)
+    return render_template("LogInPage.html", user=current_user)
 
 
-@routes.route("/sign-up", methods=["GET", "POST"])
+@auth.route("/sign-up", methods=["GET", "POST"])
 def signUp():
     if request.method == "POST":
         email = request.form.get("email")
@@ -62,38 +65,66 @@ def signUp():
         password1 = request.form.get("password1")
         password2 = request.form.get("password2")
 
-        user = User.query.filter_by(email=email).first()
-        if user:
-            flash("Email already exists.", category="error")
-        elif len(email) < 4:
+        # user = User.query.filter_by(email=email).first()
+        # if user:
+        #     flash("Email already exists.", category="error")
+        # elif len(email) < 4:
+        #     flash("Email must be larger than 3 characters", category="error")
+        # elif len(first_name) < 2:
+        #     flash("First name must be larger than 1 character", category="error")
+        # elif password1 != password2:
+        #     flash("Passwords must match!", category="error")
+        # elif len(password1) < 7:
+        #     flash(
+        #         "Password is too short. It should be larger than 7 characters",
+        #         category="error",
+        #     )
+        # else:
+        #     # generates a password hash with sha-256 algorithm as a security feature.
+        #     new_user = User(
+        #         email=email,
+        #         first_name=first_name,
+        #         password=generate_password_hash(password1, method="pbkdf2:sha256"),
+        #     )
+        #     db.session.add(new_user)
+        #     db.session.commit()
+        #     login_user(new_user, remember=True)
+        #     flash("Account created successfully!", category="success")
+        #     # return redirect(url_for('routes.authorizedHomepage'), user=current_user)
+        #     return render_template("AuthorizedHomepage.html", user=current_user)
+
+        if not email or len(email) < 4:
             flash("Email must be larger than 3 characters", category="error")
-        elif len(first_name) < 2:
+        elif not first_name or len(first_name) < 2:
             flash("First name must be larger than 1 character", category="error")
         elif password1 != password2:
             flash("Passwords must match!", category="error")
-        elif len(password1) < 7:
+        elif not password1 or len(password1) < 7:
             flash(
                 "Password is too short. It should be larger than 7 characters",
                 category="error",
             )
         else:
-            # generates a password hash with sha-256 algorithm as a security feature.
-            new_user = User(
-                email=email,
-                first_name=first_name,
-                password=generate_password_hash(password1, method="pbkdf2:sha256"),
-            )
-            db.session.add(new_user)
-            db.session.commit()
-            login_user(new_user, remember=True)
-            flash("Account created successfully!", category="success")
-            # return redirect(url_for('routes.authorizedHomepage'), user=current_user)
-            return render_template("AuthorizedHomepage.html", user=current_user)
-
+            user = User.query.filter_by(email=email).first()
+            if user:
+                flash("Email already exists.", category="error")
+            else:
+                # generates a password hash with sha-256 algorithm as a security feature
+                new_user = User(
+                    email=email,
+                    first_name=first_name,
+                    password=generate_password_hash(password1, method="pbkdf2:sha256"),
+                )
+                db.session.add(new_user)
+                db.session.commit()
+                login_user(new_user, remember=True)
+                flash("Account created successfully!", category="success")
+                # return redirect(url_for('routes.authorizedHomepage'), user=current_user)
+                return render_template("AuthorizedHomepage.html", user=current_user)
     return render_template("SignUpPage.html", user=current_user)
 
 
-@routes.route("/authorizedHomepage", methods=["POST", "GET"])
+@auth.route("/authorizedHomepage", methods=["POST", "GET"])
 @login_required
 def authorizedHomepage():
     if request.method == "POST":

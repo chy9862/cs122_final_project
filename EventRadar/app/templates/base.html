@@ -43,12 +43,12 @@
         <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"></button>
         <div class="collapse navbar-collapse" id="navcol-1">
             {% if user.is_authenticated %}
-                <a href="{{ url_for('routes.authorizedHomepage') }}">Home</a>
-                <a class="btn btn-primary ms-auto" role="button" href="{{ url_for('routes.logout') }}"
+                <a href="{{ url_for('auth.authorizedHomepage') }}">Home</a>
+                <a class="btn btn-primary ms-auto" role="button" href="{{ url_for('auth.logout') }}"
                    style="margin-right: 15px;margin-left: 15px;padding-left: 12px;">Log-out</a>
             {% else %}
-                <a class="btn btn-primary ms-auto" role="button" href="{{ url_for('routes.login') }}">Log-in</a>
-                <a class="btn btn-primary align-self-end" role="button" href="{{ url_for('routes.signUp') }}"
+                <a class="btn btn-primary ms-auto" role="button" href="{{ url_for('auth.login') }}">Log-in</a>
+                <a class="btn btn-primary align-self-end" role="button" href="{{ url_for('auth.signUp') }}"
                    style="margin-right: 15px;margin-left: 15px;padding-left: 12px;">Sign-Up</a>
             {% endif %}
         </div>

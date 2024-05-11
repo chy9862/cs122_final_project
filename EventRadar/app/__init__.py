@@ -24,6 +24,7 @@ from app.config import Config
 
 # Create the database instance globally
 db = SQLAlchemy()
+login_manager = LoginManager()
 
 
 def create_app(config_class=Config):
@@ -51,9 +52,10 @@ def create_app(config_class=Config):
     # Initialize the database
     db.init_app(app)
 
+    from app.models import User
+
     # Initialize login manager
-    login_manager = LoginManager()
-    login_manager.login_view = "views.home"  # Specify the login view
+    login_manager.login_view = "main.home"  # Specify the login view
     login_manager.init_app(app)
 
     # Load user function for login manager
@@ -62,13 +64,12 @@ def create_app(config_class=Config):
         return User.query.get(int(id))
 
     # Import the blueprints
-    from app.auth.views import routes as routes_bp
-    from app.models.models import User
-    from app.views import views as views_bp
+    from app.auth import auth as auth_blueprint
+    from app.main import main as main_blueprint
 
     # Register the blueprints with the app
-    app.register_blueprint(routes_bp, url_prefix="/auth")
-    app.register_blueprint(views_bp, url_prefix="/")
+    app.register_blueprint(auth_blueprint, url_prefix="/auth")
+    app.register_blueprint(main_blueprint, url_prefix="/")
 
     # Create the database tables if they do not exist
     with app.app_context():
