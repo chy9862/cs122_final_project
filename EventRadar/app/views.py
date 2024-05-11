@@ -10,7 +10,7 @@ Typical usage example:
     return render_template("index.html", user=current_user)
 """
 
-from flask import Blueprint, render_template, request, flash, Flask
+from flask import Blueprint, render_template
 from flask_login import current_user
 
 # Create a Blueprint object that defines the routes for the application
