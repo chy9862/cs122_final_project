@@ -108,7 +108,7 @@ def authorizedHomepage():
         ):  # you can change the number in range(num) for how many pages you want
 
             # get the json data
-            event_data = fetch_event_details(Config.api_key, i, keyword)
+            event_data = fetch_event_details(Config.API_KEY, i, keyword)
 
             # Check if the response is an error message
             if isinstance(event_data, str):
@@ -166,10 +166,10 @@ def authorizedHomepage():
 
 
 # get the api key and page number
-def fetch_event_details(api_key, page, keyword):
+def fetch_event_details(API_KEY, page, keyword):
 
     # url for events
-    url = f"https://app.ticketmaster.com/discovery/v2/events.json?apikey={api_key}&locale=*&page={page}&keyword={keyword}"
+    url = f"https://app.ticketmaster.com/discovery/v2/events.json?apikey={API_KEY}&locale=*&page={page}&keyword={keyword}"
 
     # request
     response = requests.get(url)
