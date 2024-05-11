@@ -7,7 +7,6 @@ they do not exist.
 
 Attributes:
     db: A SQLAlchemy object that represents the database.
-    DB_NAME: A string representing the name of the database file.
 
 Methods:
     create_app: A function that creates the app instance with the specified
@@ -25,7 +24,6 @@ from app.config import Config
 
 # Create the database instance globally
 db = SQLAlchemy()
-DB_NAME = "eventradar.db"
 
 
 def create_app(config_class=Config):
@@ -44,6 +42,7 @@ def create_app(config_class=Config):
     """
     app = Flask(__name__)
     app.config.from_object(config_class)
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = Config.SQLALCHEMY_TRACK_MODIFICATIONS
 
     # Secret key for cookies that will be generated in eventRadar
     app.config["SECRET_KEY"] = Config.SECRET_KEY
