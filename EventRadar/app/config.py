@@ -12,8 +12,7 @@ Typical usage example:
     app.config.from_object(Config)
     app.config["SECRET_KEY"] = Config.SECRET_KEY
     app.config["SQLALCHEMY_DATABASE_URI"] = Config.SQLALCHEMY_DATABASE_URI
-    db.init_app(app)
-    login_manager.init_app(app)
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = Config.SQLALCHEMY_TRACK_MODIFICATIONS
 """
 
 import os
