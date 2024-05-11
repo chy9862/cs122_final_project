@@ -1,6 +1,11 @@
-
+# PyCharm IDE files
 .idea/
+
+# Virtual environment files
 env/
+
+# Python cache files
+EventRadar/__pycache__/
 EventRadar/app/__pycache__/
 EventRadar/app/auth/__pycache__/
 EventRadar/app/models/__pycache__/
