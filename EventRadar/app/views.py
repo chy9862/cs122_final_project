@@ -19,4 +19,13 @@ views = Blueprint("views", __name__)
 
 @views.route("/")
 def home():
+    """Renders the home page of the application.
+
+    This function renders the home page of the application, which is the landing page
+    when the user first visits the site. It returns the rendered template with the
+    current user object.
+
+    Returns:
+        A rendered template with the current user object.
+    """
     return render_template("index.html", user=current_user)
